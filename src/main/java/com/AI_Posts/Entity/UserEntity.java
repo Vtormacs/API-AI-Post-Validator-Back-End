@@ -46,19 +46,19 @@ public class UserEntity {
     private String senha;
 
     @OneToMany(mappedBy = "user")
-    @JsonIgnoreProperties("user")  // Evita loop infinito durante a serialização de ComplaintEntity
+    @JsonIgnoreProperties({"user", "complaints"})  // Evita loop infinito durante a serialização de ComplaintEntity
     private List<ComplaintEntity> complaints = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
-    @JsonIgnoreProperties("user")  // Evita loop infinito durante a serialização de LikeEntity
+    @JsonIgnoreProperties({"user", "likes"})  // Evita loop infinito durante a serialização de LikeEntity
     private List<LikeEntity> likes = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
-    @JsonIgnoreProperties("user")
+    @JsonIgnoreProperties({"user", "posts"})
     private List<PostEntity> posts = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
-    @JsonIgnoreProperties("user")
+    @JsonIgnoreProperties({"user", "comments"})
     private List<CommentEntity> comments = new ArrayList<>();
 
 }

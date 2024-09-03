@@ -1,5 +1,6 @@
 package com.AI_Posts.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -27,5 +28,6 @@ public class TagEntity {
     private String nome;
 
     @ManyToMany
+    @JsonIgnore
     private List<PostEntity> posts = new ArrayList<>();
 }

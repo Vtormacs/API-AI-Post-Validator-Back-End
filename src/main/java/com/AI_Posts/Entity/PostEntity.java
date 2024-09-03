@@ -26,10 +26,21 @@ public class PostEntity {
 
     private Instant data;
 
-    @NotBlank @NotNull @NotEmpty
+    @NotBlank
+    @NotNull
+    @NotEmpty
     private String conteudo;
 
     private boolean valido;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonIgnoreProperties({"complaints", "likes", "comments", "posts", "senha"})
+    private UserEntity user;
+
+    @OneToMany(mappedBy = "post")
+    @JsonIgnoreProperties("post")  // Evita loop infinito durante a serialização de LikeEntity
+    private List<LikeEntity> likes = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(
@@ -40,20 +51,10 @@ public class PostEntity {
     private List<TagEntity> tags = new ArrayList<>();
 
     @OneToMany(mappedBy = "post")
-    @JsonIgnoreProperties("post")  // Evita loop infinito durante a serialização de ComplaintEntity
-    private List<ComplaintEntity> complaints = new ArrayList<>();
-
-    @OneToMany(mappedBy = "post")
-    @JsonIgnoreProperties("post")  // Evita loop infinito durante a serialização de LikeEntity
-    private List<LikeEntity> likes = new ArrayList<>();
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    @JsonIgnoreProperties("post")
-    private UserEntity user;
-
-    @OneToMany(mappedBy = "post")
     @JsonIgnoreProperties("post")
     private List<CommentEntity> comments = new ArrayList<>();
 
+    @OneToMany(mappedBy = "post")
+    @JsonIgnoreProperties("post")  // Evita loop infinito durante a serialização de ComplaintEntity
+    private List<ComplaintEntity> complaints = new ArrayList<>();
 }
