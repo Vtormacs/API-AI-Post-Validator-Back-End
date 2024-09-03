@@ -1,5 +1,6 @@
 package com.AI_Posts.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
@@ -7,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -41,4 +44,12 @@ public class UserEntity {
     @NotNull
     @NotEmpty
     private String senha;
+
+    @OneToMany(mappedBy = "user")
+    @JsonIgnoreProperties("user")  // Evita loop infinito durante a serialização de ComplaintEntity
+    private List<ComplaintEntity> complaints = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    @JsonIgnoreProperties("user")  // Evita loop infinito durante a serialização de LikeEntity
+    private List<LikeEntity> likes = new ArrayList<>();
 }

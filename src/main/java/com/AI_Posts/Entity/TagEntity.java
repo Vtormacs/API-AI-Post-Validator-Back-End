@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Setter
@@ -20,4 +22,6 @@ public class TagEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID uuid;
 
+    @ManyToMany
+    private List<PostEntity> posts = new ArrayList<>();
 }
