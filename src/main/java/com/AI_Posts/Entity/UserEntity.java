@@ -57,4 +57,8 @@ public class UserEntity {
     @JsonIgnoreProperties("user")
     private List<PostEntity> posts = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user")
+    @JsonIgnoreProperties("user")
+    private List<CommentEntity> comments = new ArrayList<>();
+
 }

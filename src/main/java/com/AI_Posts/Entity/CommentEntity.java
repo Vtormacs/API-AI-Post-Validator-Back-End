@@ -41,4 +41,9 @@ public class CommentEntity {
     @OneToMany(mappedBy = "comment")
     @JsonIgnoreProperties("comment")  // Evita loop infinito durante a serialização de LikeEntity
     private List<LikeEntity> likes = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    @JsonIgnoreProperties("comments")
+    private UserEntity user;
 }
