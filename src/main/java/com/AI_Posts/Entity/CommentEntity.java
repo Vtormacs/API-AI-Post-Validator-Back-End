@@ -46,4 +46,9 @@ public class CommentEntity {
     @JoinColumn(name = "user_id")
     @JsonIgnoreProperties("comments")
     private UserEntity user;
+
+    @ManyToOne
+    @JoinColumn(name = "post_id")
+    @JsonIgnoreProperties("comments")
+    private PostEntity post;
 }
