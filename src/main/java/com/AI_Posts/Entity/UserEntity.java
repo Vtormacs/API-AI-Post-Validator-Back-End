@@ -52,4 +52,9 @@ public class UserEntity {
     @OneToMany(mappedBy = "user")
     @JsonIgnoreProperties("user")  // Evita loop infinito durante a serialização de LikeEntity
     private List<LikeEntity> likes = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user")
+    @JsonIgnoreProperties("user")
+    private List<PostEntity> posts = new ArrayList<>();
+
 }
