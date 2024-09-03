@@ -1,7 +1,11 @@
 package com.AI_Posts.Service;
 
 import com.AI_Posts.Entity.PostEntity;
+import com.AI_Posts.Entity.TagEntity;
+import com.AI_Posts.Entity.UserEntity;
 import com.AI_Posts.Repository.PostRepository;
+import com.AI_Posts.Repository.TagRepository;
+import com.AI_Posts.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +18,24 @@ public class PostService {
     @Autowired
     private PostRepository postRepository;
 
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private TagRepository tagRepository;
+
     public PostEntity save(PostEntity post) {
         try {
+            UserEntity user = userRepository.findById(post.getUser().getUuid()).orElseThrow(() -> new RuntimeException("Erro ao achar usuario"));
+
+            List<UUID> tagsId = post.getTags().stream().map(TagEntity :: getUuid).toList();
+
+            List<TagEntity> tags = tagRepository.findAllById(tagsId);
+
+            post.setUser(user);
+
+            post.setTags(tags);
+
             return postRepository.save(post);
         } catch (Exception e) {
             System.out.println("Erro no service, não deu para salvar o post no repository: " + e.getMessage());
