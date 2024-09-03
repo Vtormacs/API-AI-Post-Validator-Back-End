@@ -1,6 +1,7 @@
 package com.AI_Posts.Entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,9 @@ public class TagEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID uuid;
+
+    @NotNull
+    private String nome;
 
     @ManyToMany
     private List<PostEntity> posts = new ArrayList<>();
