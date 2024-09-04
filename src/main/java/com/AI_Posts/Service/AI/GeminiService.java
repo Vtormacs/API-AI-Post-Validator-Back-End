@@ -1,6 +1,7 @@
 package com.AI_Posts.Service.AI;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -8,8 +9,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Service
 public class GeminiService {
-    private final String GEMINI_KEY = "GEMINI_KEY";
-    private final String GEMINI_URL = "GEMINI_URL";
+
+    @Value("${gemini.key}")
+    private String GEMINI_KEY;
+
+    @Value("${gemini.url}")
+    private String GEMINI_URL;
 
     private final RestTemplate restTemplate = new RestTemplate();
 
