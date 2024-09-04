@@ -12,9 +12,4 @@ public class GeminiController {
     @Autowired
     private GeminiService geminiService;
 
-    @GetMapping("/validate")
-    public ResponseEntity<String> validateInput(@RequestParam String userInput) {
-
-        return ResponseEntity.ok(geminiService.validadeAI(userInput));
-    }
 }

@@ -15,16 +15,16 @@ class GeminiServiceTest {
     @Test
     void validadeAI() {
 
-        String retorno = this.geminiService.validadeAI("hj o dia esta lindo");
+        Boolean retorno = this.geminiService.validadeAI("hj o dia esta lindo");
 
-        assertEquals("1", retorno);
+        assertEquals(true, retorno);
     }
 
     @Test
     void validadeAI2() {
 
-        String retorno = this.geminiService.validadeAI("o mundo e uma merda n presta para nada quero morrer");
+        Boolean retorno = this.geminiService.validadeAI("o mundo e uma merda n presta para nada quero morrer");
 
-        assertEquals("0", retorno);
+        assertEquals(false, retorno);
     }
 }

@@ -33,8 +33,7 @@ public class GeminiService {
         return response.getBody();
     }
 
-    public String validadeAI(String userInput) {
-
+    public boolean validadeAI(String userInput) {
         String prompt = "Sempre retorne apenas um dígito. Analise se a seguinte mensagem é ofensiva, caso seja, retorne 0, caso contrário retorne 1. " +
                 "Mensagem: " + userInput;
         System.out.println(prompt);
@@ -49,11 +48,15 @@ public class GeminiService {
         ResponseEntity<String> response = restTemplate.exchange(GEMINI_URL, HttpMethod.POST, requestEntity, String.class);
 
         if (response.getStatusCode() == HttpStatus.OK) {
-            return extractResponseFromJson(response.getBody());
+            String result = extractResponseFromJson(response.getBody());
+
+            // Verifica o retorno da API: "1" (não ofensivo) retorna true, "0" (ofensivo) retorna false
+            return "1".equals(result);
         } else {
             throw new RuntimeException("Failed to call API: " + response.getStatusCode());
         }
     }
+
 
     private String extractResponseFromJson(String responseBody) {
         try {

@@ -6,6 +6,7 @@ import com.AI_Posts.Entity.UserEntity;
 import com.AI_Posts.Repository.PostRepository;
 import com.AI_Posts.Repository.TagRepository;
 import com.AI_Posts.Repository.UserRepository;
+import com.AI_Posts.Service.AI.GeminiService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +26,9 @@ public class PostService {
     @Autowired
     private TagRepository tagRepository;
 
+    @Autowired
+    private GeminiService geminiService;
+
     public PostEntity save(PostEntity post) {
         try {
             UserEntity user = userRepository.findById(post.getUser().getUuid()).orElseThrow(() -> new RuntimeException("Erro ao achar usuario"));
@@ -38,6 +42,8 @@ public class PostService {
             post.setTags(tags);
 
             post.setData(Instant.now());
+
+            post.setValido(geminiService.validadeAI(post.getConteudo()));
 
             return postRepository.save(post);
         } catch (Exception e) {
