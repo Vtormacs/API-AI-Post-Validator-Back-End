@@ -45,13 +45,10 @@ public class TagService {
     }
 
     public TagEntity findById(UUID uuid) {
-        try {
-            return tagRepository.findById(uuid).orElseThrow(() -> new RuntimeException("Tag não encontrada no banco"));
-        } catch (Exception e) {
-            System.out.println("Erro no service, não deu para encontrar a tag no repository: " + e.getMessage());
-            return new TagEntity();
-        }
+        return tagRepository.findById(uuid)
+                .orElseThrow(() -> new RuntimeException("Tag não encontrada no banco"));
     }
+
 
     public List<TagEntity> findAll() {
         try {

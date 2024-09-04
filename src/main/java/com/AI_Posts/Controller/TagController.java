@@ -3,6 +3,7 @@ package com.AI_Posts.Controller;
 import com.AI_Posts.Entity.TagEntity;
 import com.AI_Posts.Service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,7 +49,7 @@ public class TagController {
         try {
             return ResponseEntity.ok(tagService.findById(uuid));
         } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
+            return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
         }
     }
 
