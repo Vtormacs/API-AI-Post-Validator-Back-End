@@ -9,6 +9,7 @@ import com.AI_Posts.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
@@ -35,6 +36,8 @@ public class PostService {
             post.setUser(user);
 
             post.setTags(tags);
+
+            post.setData(Instant.now());
 
             return postRepository.save(post);
         } catch (Exception e) {
