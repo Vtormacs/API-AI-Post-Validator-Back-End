@@ -3,6 +3,7 @@ package com.AI_Posts.Service;
 import com.AI_Posts.Entity.PostEntity;
 import com.AI_Posts.Entity.TagEntity;
 import com.AI_Posts.Entity.UserEntity;
+import com.AI_Posts.Exception.Post.PostNotFoundException;
 import com.AI_Posts.Repository.PostRepository;
 import com.AI_Posts.Repository.TagRepository;
 import com.AI_Posts.Repository.UserRepository;
@@ -74,12 +75,7 @@ public class PostService {
     }
 
     public PostEntity findById(UUID uuid) {
-        try {
-            return postRepository.findById(uuid).orElseThrow(() -> new RuntimeException("Post não encontrado no banco"));
-        } catch (Exception e) {
-            System.out.println("Erro no service, não deu para encontrar o post no repository: " + e.getMessage());
-            return new PostEntity();
-        }
+        return postRepository.findById(uuid).orElseThrow(() -> new PostNotFoundException());
     }
 
     public List<PostEntity> findAll() {
