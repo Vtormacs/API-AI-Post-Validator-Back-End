@@ -1,10 +1,13 @@
 package com.AI_Posts.Controller;
 
 import com.AI_Posts.Entity.UserEntity;
+import com.AI_Posts.Exception.User.UserNotFoundException;
 import com.AI_Posts.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.UUID;
@@ -45,11 +48,7 @@ public class UserController {
 
     @GetMapping("/findById")
     public ResponseEntity<UserEntity> findById(@RequestParam UUID uuid) {
-        try {
             return ResponseEntity.ok(userService.findById(uuid));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
-        }
     }
 
     @GetMapping("/findAll")

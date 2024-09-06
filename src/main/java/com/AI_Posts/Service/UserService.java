@@ -1,6 +1,7 @@
 package com.AI_Posts.Service;
 
 import com.AI_Posts.Entity.UserEntity;
+import com.AI_Posts.Exception.User.UserNotFoundException;
 import com.AI_Posts.Repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,12 +46,7 @@ public class UserService {
     }
 
     public UserEntity findById(UUID uuid) {
-        try {
-            return userRepository.findById(uuid).orElseThrow(() -> new RuntimeException("usuario n encontrado no banco"));
-        } catch (Exception e) {
-            System.out.println("Erro no service, n deu para encontrar o usuario no repository" + e.getMessage());
-            return new UserEntity();
-        }
+        return userRepository.findById(uuid).orElseThrow(() -> new UserNotFoundException());
     }
 
     public List<UserEntity> findAll() {
