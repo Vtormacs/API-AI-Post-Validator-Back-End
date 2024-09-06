@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com</groupId>
-    <artifactId>AI-Posts</artifactId>
+    <artifactId>API-AI-Post-Validator-Back-End</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>AI-Posts</name>
     <description>Publicação de post com IA</description>
