@@ -4,6 +4,7 @@ import com.AI_Posts.Entity.PostEntity;
 import com.AI_Posts.Entity.TagEntity;
 import com.AI_Posts.Entity.UserEntity;
 import com.AI_Posts.Exception.Post.PostNotFoundException;
+import com.AI_Posts.Exception.User.UserNotFoundException;
 import com.AI_Posts.Repository.PostRepository;
 import com.AI_Posts.Repository.TagRepository;
 import com.AI_Posts.Repository.UserRepository;
@@ -32,7 +33,7 @@ public class PostService {
 
     public PostEntity save(PostEntity post) {
         try {
-            UserEntity user = userRepository.findById(post.getUser().getUuid()).orElseThrow(() -> new RuntimeException("Erro ao achar usuario"));
+            UserEntity user = userRepository.findById(post.getUser().getUuid()).orElseThrow(() -> new UserNotFoundException("Erro ao achar usuario"));
 
             List<UUID> tagsId = post.getTags().stream().map(TagEntity :: getUuid).toList();
 
