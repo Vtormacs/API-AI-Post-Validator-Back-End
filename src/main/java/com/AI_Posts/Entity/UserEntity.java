@@ -45,6 +45,8 @@ public class UserEntity {
     @NotEmpty
     private String senha;
 
+    Boolean ativo = false;
+
     @OneToMany(mappedBy = "user")
     @JsonIgnoreProperties({"user", "complaints"})  // Evita loop infinito durante a serialização de ComplaintEntity
     private List<ComplaintEntity> complaints = new ArrayList<>();
